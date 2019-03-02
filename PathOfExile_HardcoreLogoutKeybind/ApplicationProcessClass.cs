@@ -188,7 +188,7 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 case -1:
                     prefix = "[DEBUG] ";
                     return;
-                    break;
+                    //break;
                 case 0:
                     prefix = "[INFO] ";
                     break;
