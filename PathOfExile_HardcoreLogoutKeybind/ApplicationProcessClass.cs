@@ -16,8 +16,8 @@ namespace PathOfExile_HardcoreLogoutKeybind
     class ApplicationProcessClass
     {
         // shared with utility classes
-        public static IntPtr client_hWnd;
-        public static uint mPid;
+        public static IntPtr poe_hWnd;
+        public static uint mPoePid;
 
         // internal
         private const int WH_KEYBOARD_LL = 13;
@@ -41,6 +41,7 @@ namespace PathOfExile_HardcoreLogoutKeybind
         private static extern IntPtr GetModuleHandle(string lpModuleName);
         #endregion
 
+
         /// <summary>
         /// Application's primary thread (MAIN)
         /// </summary>
@@ -61,6 +62,28 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 MessageBox.Show("PathOfExile.exe killer must be run as Administrator.", "Incorrect Permissions", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 System.Environment.Exit(0);
             }
+
+            setupPoePid();
+
+            try
+            {
+                _hookID = SetHook(_proc);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                Application.Run(new MyCustomApplicationContext());
+            }
+            finally
+            {
+                UnhookWindowsHookEx(_hookID);
+                Application.Exit();
+            }
+        }
+
+
+
+        public static void setupPoePid()
+        {
             bool runOnce = true;
             // Run every 100ms and attempt to find game client
             while (true)
@@ -68,9 +91,9 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 // Get process handler from name
                 foreach (Process proc in Process.GetProcesses())
                 {
-                    if (proc.MainWindowTitle == @"Path of Exile")
+                    if (proc.MainWindowTitle.Equals(@"Path of Exile"))
                     {
-                        client_hWnd = proc.MainWindowHandle;
+                        poe_hWnd = proc.MainWindowHandle;
                         break;
                     }
                 }
@@ -78,7 +101,7 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 LogToConsole("Waiting for PoE process...", 0);
 
                 // If PoE is not running
-                if (client_hWnd == IntPtr.Zero)
+                if (poe_hWnd == IntPtr.Zero)
                 {
                     // If first run print text
                     if (runOnce)
@@ -101,27 +124,13 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 }
 
                 // Get window PID from handler
-                Win32Util.GetWindowThreadProcessId(client_hWnd, out mPid);
+                Win32Util.GetWindowThreadProcessId(poe_hWnd, out mPoePid);
                 // Not 100% sure if needed but I'll keep it here just to be safe
-                if (mPid <= 0) continue;
+                if (mPoePid <= 0) continue;
                 break;
             }
-
-
-            try
-            {
-                _hookID = SetHook(_proc);
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-
-                Application.Run(new MyCustomApplicationContext());
-            }
-            finally
-            {
-                UnhookWindowsHookEx(_hookID);
-                Application.Exit();
-            }
         }
+
 
         /// <summary>
         /// Sets the hook on the current process. required to get keyboard events at a low level
@@ -157,7 +166,7 @@ namespace PathOfExile_HardcoreLogoutKeybind
                     if (Win32Util.CheckIsPOEForeground())
                     { // don't do it if alt-tabbed (maybe you typed the tilde somewhere  else)
                         LogToConsole("Closing TCP connections...", 0);
-                        long delay = TCPUtil.TerminateConnection(mPid);
+                        long delay = TCPUtil.TerminateConnection(mPoePid);
                         LogToConsole("Closed connections (took " + delay + " ms)", 0);
                     }
                     else
@@ -188,7 +197,7 @@ namespace PathOfExile_HardcoreLogoutKeybind
                 case -1:
                     prefix = "[DEBUG] ";
                     return;
-                    //break;
+                //break;
                 case 0:
                     prefix = "[INFO] ";
                     break;
@@ -248,7 +257,10 @@ namespace PathOfExile_HardcoreLogoutKeybind
             if (GetWindowText(handle, Buff, 256) > 0)
             {
                 // NOTE: this seems to alwys be the name of the executable no matter what I change the options to
-                if (Buff.ToString().Equals("Path of Exile")) return true;
+                if (Buff.ToString().Equals("Path of Exile"))
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -384,7 +396,9 @@ namespace PathOfExile_HardcoreLogoutKeybind
             trayIcon = new NotifyIcon()
             {
                 Icon = Resources.AppIcon,
+                Text = "PoE Hardcore Logout",
                 ContextMenu = new ContextMenu(new MenuItem[] {
+                new MenuItem("Refresh", Refresh),
                 new MenuItem("Exit", Exit)
             }),
                 Visible = true
@@ -397,6 +411,11 @@ namespace PathOfExile_HardcoreLogoutKeybind
             trayIcon.Visible = false;
 
             Application.Exit();
+        }
+
+        void Refresh(object sender, EventArgs e)
+        {
+            ApplicationProcessClass.setupPoePid();
         }
     }
 }
