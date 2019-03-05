@@ -1,6 +1,8 @@
 # PathOfExile_HardcoreLogoutKeybind
 Background service for forcing Path of Exile TCP/IP logout on keypress. Useful for hardcore players.
 
+https://imgur.com/gallery/wgjCZqX
+
 ## Purpose
 Listen for a specific keystroke globally and when it occurs, force Path of Exile game client to disconnect as quickly as possible.
 
