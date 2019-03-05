@@ -24,7 +24,10 @@ namespace PathOfExile_HardcoreLogoutKeybind
         private const int WM_KEYDOWN = 0x0100;
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
-        private static Int32 KEYCODE_CFG = -142;
+        private static Int32 KEYCODE_CFG = 192;
+        private static Int32 KEYCODE_HIDEOUT = 116;
+        private static Int32 KEYCODE_WHOIS = 115;
+        private static Int32 KEYCODE_REMAIN = 114;
 
         #region DLL_Imports
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -174,6 +177,18 @@ namespace PathOfExile_HardcoreLogoutKeybind
                         // feed error
                         LogToConsole("Path of Exile handle not found.", 2);
                     }
+                }
+                else if (vkCode == KEYCODE_HIDEOUT)
+                {
+                    POEUtil.GoToHideout();
+                }
+                else if (vkCode == KEYCODE_WHOIS)
+                {
+                    POEUtil.WhoisStem();
+                }
+                else if (vkCode == KEYCODE_REMAIN)
+                {
+                    POEUtil.RemainingCommand();
                 }
                 LogToConsole("KEY: " + (Keys)vkCode, -1);
             }
@@ -384,6 +399,94 @@ namespace PathOfExile_HardcoreLogoutKeybind
             return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond - startTime;
         }
 
+    }
+
+    public sealed class POEUtil
+    {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        public static void RemainingCommand()
+        {
+            IntPtr WindowName = FindWindow(null, "Path of Exile");
+
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
+            System.Threading.Thread.Sleep(6);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.R, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.E, IntPtr.Zero);
+            System.Threading.Thread.Sleep(8);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.M, IntPtr.Zero);
+            System.Threading.Thread.Sleep(4);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.A, IntPtr.Zero);
+            System.Threading.Thread.Sleep(7);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
+            System.Threading.Thread.Sleep(9);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.N, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.N, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.G, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        public static void WhoisStem()
+        {
+            IntPtr WindowName = FindWindow(null, "Path of Exile");
+
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
+            System.Threading.Thread.Sleep(6);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.W, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.H, IntPtr.Zero);
+            System.Threading.Thread.Sleep(8);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.O, IntPtr.Zero);
+            System.Threading.Thread.Sleep(4);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
+            System.Threading.Thread.Sleep(7);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.S, IntPtr.Zero);
+            System.Threading.Thread.Sleep(9);
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Space, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+        }
+
+
+        public static void GoToHideout()
+        {
+            IntPtr WindowName = FindWindow(null, "Path of Exile");
+
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
+            System.Threading.Thread.Sleep(6);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.H, IntPtr.Zero);
+            System.Threading.Thread.Sleep(5);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
+            System.Threading.Thread.Sleep(8);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.D, IntPtr.Zero);
+            System.Threading.Thread.Sleep(4);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.E, IntPtr.Zero);
+            System.Threading.Thread.Sleep(7);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.O, IntPtr.Zero);
+            System.Threading.Thread.Sleep(9);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.U, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x101, (IntPtr)Keys.T, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+            PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
+            System.Threading.Thread.Sleep(10);
+        }
     }
 
     public class MyCustomApplicationContext : ApplicationContext
