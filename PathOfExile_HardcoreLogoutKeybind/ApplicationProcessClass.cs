@@ -414,29 +414,29 @@ namespace PathOfExile_HardcoreLogoutKeybind
             IntPtr WindowName = FindWindow(null, "Path of Exile");
 
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(50);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.R, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.E, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.M, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.A, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.N, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.N, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.G, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
         }
 
         public static void WhoisStem()
@@ -444,21 +444,21 @@ namespace PathOfExile_HardcoreLogoutKeybind
             IntPtr WindowName = FindWindow(null, "Path of Exile");
 
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.W, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.H, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.O, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.S, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Space, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
         }
 
 
@@ -467,25 +467,25 @@ namespace PathOfExile_HardcoreLogoutKeybind
             IntPtr WindowName = FindWindow(null, "Path of Exile");
 
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.OemQuestion, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.H, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.I, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.D, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.E, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.O, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.U, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x101, (IntPtr)Keys.T, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
             PostMessage(WindowName, 0x100, (IntPtr)Keys.Enter, IntPtr.Zero);
-            System.Threading.Thread.Sleep(3);
+            System.Threading.Thread.Sleep(34);
         }
     }
 
